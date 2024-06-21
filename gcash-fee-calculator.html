@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCash Cash-In/Cash-Out Fee Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #007bff;
+        }
+        label, input, p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        p {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>GCash Cash-In/Cash-Out Fee Calculator</h1>
+        <label for="amount">Enter Amount (P): </label>
+        <input type="number" id="amount" name="amount" oninput="calculateFee()">
+        <p id="fee">Service Fee: </p>
+    </div>
+    
+    <script>
+        const feeData = [
+            [1, 100, 5],
+            [101, 500, 10],
+            [501, 1000, 20],
+            [1001, 1500, 30],
+            [1501, 2000, 40],
+            [2001, 2500, 50],
+            [2501, 3000, 60],
+            [3001, 3500, 70],
+            [3501, 4000, 80],
+            [4001, 4500, 90],
+            [4501, 5000, 100],
+            [5001, 5500, 110],
+            [5501, 6000, 120],
+            [6001, 6500, 130],
+            [6501, 7000, 140],
+            [7001, 7500, 150],
+            [7501, 8000, 160],
+            [8001, 8500, 170],
+            [8501, 9000, 180],
+            [9001, 9500, 190],
+            [9501, 10000, 200]
+        ];
+
+        function calculateFee() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            let fee = 'Amount out of range';
+            if (!isNaN(amount)) {
+                for (const range of feeData) {
+                    const [min, max, feeAmount] = range;
+                    if (amount >= min && amount <= max) {
+                        fee = 'Service Fee: P' + feeAmount;
+                        break;
+                    }
+                }
+            }
+            document.getElementById('fee').innerText = fee;
+        }
+    </script>
+</body>
+</html>
